@@ -1188,13 +1188,15 @@
     audio.src = 'https://archive.org/download/78_moonlight-serenade_glenn-miller-and-his-orchestra_gbia0001318a/Moonlight%20Serenade%20-%20Glenn%20Miller%20and%20His%20Orchestra.mp3';
     audio.loop = true;
     audio.volume = 0.45;
-    audio.muted = true;
 
     const playBtn      = document.getElementById('play-btn');
     const progressFill = document.getElementById('progress-fill');
     const progressBar  = document.getElementById('progress-bar');
     const noteEl       = document.getElementById('note');
     let playing = false, noteInterval;
+
+    playBtn.textContent = '▶';
+    playBtn.title = 'Reproducir';
 
     function spawnNote() {
       noteEl.classList.remove('active');
@@ -1208,50 +1210,23 @@
       spawnNote();
     }
 
-    // Autoplay muted (browsers allow this)
-    audio.play().then(() => {
-      playing = true;
-      playBtn.textContent = '🔇';
-      playBtn.title = 'Toca para activar el sonido';
-      startNotes();
-    }).catch(() => {
-      playBtn.textContent = '▶';
-      playBtn.title = 'Reproducir';
-    });
-
     playBtn.addEventListener('click', () => {
-      if (audio.muted) {
-        audio.muted = false;
-        playBtn.textContent = '⏸';
-        playBtn.title = 'Pausar';
-        return;
-      }
       if (!playing) {
         audio.play().then(() => {
           playing = true;
           playBtn.textContent = '⏸';
+          playBtn.title = 'Pausar';
           startNotes();
         }).catch(()=>{});
       } else {
         audio.pause();
         playing = false;
         playBtn.textContent = '▶';
+        playBtn.title = 'Reproducir';
         clearInterval(noteInterval);
         noteEl.classList.remove('active');
       }
     });
-
-    // Unmute on any page interaction
-    const unmute = () => {
-      if (audio.muted && playing) {
-        audio.muted = false;
-        playBtn.textContent = '⏸';
-      }
-      document.removeEventListener('touchstart', unmute);
-      document.removeEventListener('scroll', unmute);
-    };
-    document.addEventListener('touchstart', unmute, {passive:true});
-    document.addEventListener('scroll',     unmute, {passive:true});
 
     audio.addEventListener('timeupdate', () => {
       if (audio.duration)
