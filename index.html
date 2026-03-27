@@ -236,9 +236,12 @@
     .milestones-inner { max-width: 780px; margin: 0 auto; }
     .milestone-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.25rem 1rem;
       margin-top: 1.75rem;
+    }
+    @media (min-width: 600px) {
+      .milestone-grid { grid-template-columns: repeat(3, 1fr); }
     }
     .milestone { text-align: center; }
     .milestone__year {
@@ -410,12 +413,57 @@
       animation: fall linear forwards;
     }
 
+    /* ─── PHOTO INTERLUDE (parallax) ────────────────────────── */
+    .photo-interlude {
+      position: relative;
+      overflow: hidden;
+      height: 56vw;
+      min-height: 240px;
+      max-height: 500px;
+    }
+    .photo-interlude img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 140%;
+      top: -20%;
+      object-fit: cover;
+      will-change: transform;
+      transition: opacity .6s ease;
+    }
+    /* optional tint */
+    .photo-interlude::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(59,42,20,.18) 0%,
+        rgba(59,42,20,.04) 50%,
+        rgba(59,42,20,.18) 100%
+      );
+      pointer-events: none;
+    }
+
     /* ─── SCROLL REVEAL ─────────────────────────────────────── */
     .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .85s ease, transform .85s ease;
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .9s cubic-bezier(.22,1,.36,1),
+                  transform .9s cubic-bezier(.22,1,.36,1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* staggered children */
+    .bio-card, .milestone, .masonry__item, .trio__item {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .7s cubic-bezier(.22,1,.36,1),
+                  transform .7s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible .bio-card,
+    .reveal.visible .milestone,
+    .gallery-wrap.visible .masonry__item,
+    .reveal.visible .trio__item {
+      opacity: 1; transform: translateY(0);
+    }
 
     /* ─── BIO SECTION ───────────────────────────────────────── */
     .bio-section {
@@ -578,7 +626,23 @@
       }
       .poem-section { padding: 5rem 2rem 6rem; }
       .video-section { padding: 4.5rem 2rem; }
+      .photo-interlude { height: 42vw; min-height: 320px; max-height: 560px; }
     }
+
+    /* stagger delays for grid children */
+    .reveal.visible .bio-card:nth-child(1), .gallery-wrap.visible .masonry__item:nth-child(1), .reveal.visible .trio__item:nth-child(1), .reveal.visible .milestone:nth-child(1) { transition-delay: 0s; }
+    .reveal.visible .bio-card:nth-child(2), .gallery-wrap.visible .masonry__item:nth-child(2), .reveal.visible .trio__item:nth-child(2), .reveal.visible .milestone:nth-child(2) { transition-delay: .07s; }
+    .reveal.visible .bio-card:nth-child(3), .gallery-wrap.visible .masonry__item:nth-child(3), .reveal.visible .trio__item:nth-child(3), .reveal.visible .milestone:nth-child(3) { transition-delay: .14s; }
+    .reveal.visible .bio-card:nth-child(4), .gallery-wrap.visible .masonry__item:nth-child(4), .reveal.visible .milestone:nth-child(4) { transition-delay: .21s; }
+    .reveal.visible .bio-card:nth-child(5), .gallery-wrap.visible .masonry__item:nth-child(5), .reveal.visible .milestone:nth-child(5) { transition-delay: .28s; }
+    .reveal.visible .bio-card:nth-child(6), .gallery-wrap.visible .masonry__item:nth-child(6), .reveal.visible .milestone:nth-child(6) { transition-delay: .35s; }
+    .gallery-wrap.visible .masonry__item:nth-child(7)  { transition-delay: .42s; }
+    .gallery-wrap.visible .masonry__item:nth-child(8)  { transition-delay: .49s; }
+    .gallery-wrap.visible .masonry__item:nth-child(9)  { transition-delay: .56s; }
+    .gallery-wrap.visible .masonry__item:nth-child(10) { transition-delay: .63s; }
+    .gallery-wrap.visible .masonry__item:nth-child(11) { transition-delay: .70s; }
+    .gallery-wrap.visible .masonry__item:nth-child(12) { transition-delay: .77s; }
+    .gallery-wrap.visible .masonry__item:nth-child(n+13) { transition-delay: .84s; }
 
     /* Poem cols collapse to single column on narrow screens */
     @media (max-width: 599px) {
@@ -638,6 +702,11 @@
     </div>
   </section>
 
+  <!-- PHOTO INTERLUDE 1 -->
+  <div class="photo-interlude" data-index="19">
+    <img src="p20.jpeg" alt="" loading="lazy">
+  </div>
+
   <!-- FEATURED TRIO -->
   <div class="trio reveal">
     <div class="trio__item" data-index="0"><img src="p1.jpeg" alt="Mario en el museo"></div>
@@ -652,6 +721,11 @@
       <span class="section-label">Una vida compartida</span>
       <blockquote>"Junto a ti, cada camino se convierte en una aventura, cada momento en un recuerdo para siempre."</blockquote>
     </div>
+  </div>
+
+  <!-- PHOTO INTERLUDE 2 -->
+  <div class="photo-interlude" data-index="20">
+    <img src="p21.jpeg" alt="" loading="lazy">
   </div>
 
   <!-- MASONRY GALLERY -->
@@ -679,6 +753,11 @@
     </div>
   </div>
 
+  <!-- PHOTO INTERLUDE 3 -->
+  <div class="photo-interlude" data-index="21">
+    <img src="p22.jpg" alt="" loading="lazy">
+  </div>
+
   <!-- VIDEO -->
   <div class="video-section reveal">
     <span class="section-label">Un Momento Especial</span>
@@ -688,6 +767,11 @@
         <source src="video1.mp4" type="video/mp4">
       </video>
     </div>
+  </div>
+
+  <!-- PHOTO INTERLUDE 4 -->
+  <div class="photo-interlude" data-index="22">
+    <img src="p23.jpeg" alt="" loading="lazy">
   </div>
 
   <!-- MILESTONES -->
@@ -704,6 +788,11 @@
         <div class="milestone"><div class="milestone__year">80</div><div class="milestone__label">Años de sabiduría, lucha y amor</div></div>
       </div>
     </div>
+  </div>
+
+  <!-- PHOTO INTERLUDE 5 -->
+  <div class="photo-interlude" data-index="23">
+    <img src="p24.jpeg" alt="" loading="lazy">
   </div>
 
   <!-- BIO -->
@@ -769,6 +858,11 @@
 
       </div>
     </div>
+  </div>
+
+  <!-- PHOTO INTERLUDE 6 -->
+  <div class="photo-interlude" data-index="24">
+    <img src="p25.jpeg" alt="" loading="lazy">
   </div>
 
   <!-- WISHES -->
@@ -1026,7 +1120,9 @@
       'p1.jpeg','p2.jpeg','p3.jpeg','p4.jpeg','p5.jpeg',
       'p6.jpeg','p7.jpeg','p8.jpeg','p9.jpeg','p10.jpeg',
       'p11.jpeg','p12.jpeg','p13.jpeg','p14.jpeg','p15.jpeg',
-      'p16.jpeg','p17.jpeg','p18.png','birthday-photo.jpeg'
+      'p16.jpeg','p17.jpeg','p18.png','p19.jpeg',
+      'p20.jpeg','p21.jpeg','p22.jpg','p23.jpeg','p24.jpeg','p25.jpeg',
+      'birthday-photo.jpeg'
     ];
     let cur = 0;
     const lb      = document.getElementById('lb');
@@ -1158,11 +1254,44 @@
       audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
     });
 
-    /* ── SCROLL REVEAL ───────────────────────────────── */
+    /* ── SCROLL REVEAL (with stagger) ───────────────── */
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    /* ── PARALLAX INTERLUDES ─────────────────────────── */
+    const parallaxImgs = document.querySelectorAll('.photo-interlude img');
+    let rafPending = false;
+
+    function runParallax() {
+      const vh = window.innerHeight;
+      parallaxImgs.forEach(img => {
+        const wrap = img.parentElement;
+        const r = wrap.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        // progress 0→1 as section scrolls from entering bottom to leaving top
+        const progress = 1 - r.bottom / (vh + r.height);
+        const offset = (progress - 0.5) * 90; // ±45px
+        img.style.transform = `translateY(${offset}px)`;
+      });
+      rafPending = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!rafPending) { rafPending = true; requestAnimationFrame(runParallax); }
+    }, { passive: true });
+    runParallax();
+
+    /* lightbox open on interlude click */
+    document.querySelectorAll('.photo-interlude[data-index]').forEach(el => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', () => lbOpen(+el.dataset.index));
+    });
 
     /* ── FLOATING PETALS ─────────────────────────────── */
     const emojis = ['🌻','🌼','🌿','✨','🍀'];
