@@ -393,9 +393,10 @@
     /* ─── PHOTO INTERLUDE (parallax) ────────────────────────── */
     .photo-interlude {
       position: relative;
-      overflow: visible;
-      height: auto;
-      max-height: none;
+      overflow: hidden;
+      height: 56vw;
+      min-height: 240px;
+      max-height: 500px;
     }
     .photo-interlude img {
       position: absolute;
@@ -1211,7 +1212,7 @@
     });
 
     /* ── FLOATING PETALS ─────────────────────────────── */
-    const emojis = ['🌻','🌼','🌿','✨','🍀'];
+    const emojis = ['🌻','🌼','🌿','✨','🍀','❤️'];
     function petal() {
       const el = document.createElement('div');
       el.className = 'petal';
