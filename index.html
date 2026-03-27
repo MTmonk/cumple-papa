@@ -35,7 +35,7 @@
     @keyframes scrollLine{ 0%,100%{opacity:.6;transform:scaleY(1)} 50%{opacity:.2;transform:scaleY(.5)} }
     @keyframes shimmer   { 0%,100%{opacity:.8} 50%{opacity:1} }
     @keyframes fall      { 0%{transform:translateY(0) rotate(0);opacity:.7} 100%{transform:translateY(110vh) rotate(360deg);opacity:0} }
-    @keyframes noteFloat { 0%{transform:translateY(0);opacity:.9} 100%{transform:translateY(-18px);opacity:0} }
+
 
     /* ─── HERO ──────────────────────────────────────────────── */
     .hero {
@@ -349,62 +349,53 @@
     /* ─── MUSIC PLAYER ──────────────────────────────────────── */
     .player {
       position: fixed;
-      /* bottom-center on mobile */
-      bottom: 1rem; left: 50%;
-      transform: translateX(-50%);
+      bottom: 1rem; right: 1rem;
       z-index: 9000;
       background: rgba(30,18,5,.93);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(201,152,42,.38);
-      border-radius: 60px;
-      padding: .65rem 1.2rem .65rem .75rem;
-      display: flex; align-items: center; gap: .75rem;
+      border-radius: 14px;
       box-shadow: 0 6px 24px rgba(0,0,0,.55);
-      width: calc(100% - 2rem);
-      max-width: 340px;
+      overflow: hidden;
+      width: 220px;
+      transition: width .3s, height .3s;
     }
-    .player__btn {
-      width: 2.4rem; height: 2.4rem; flex-shrink: 0;
-      border-radius: 50%;
-      background: var(--gold);
-      border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .95rem;
-      transition: transform .2s, background .2s;
-      color: var(--bark);
+    .player__toggle {
+      display: flex; align-items: center; gap: .55rem;
+      padding: .55rem .75rem;
+      cursor: pointer;
       -webkit-tap-highlight-color: transparent;
     }
-    .player__btn:active { transform: scale(.93); background: var(--gold-light); }
-    .player__info { overflow: hidden; flex: 1; }
-    .player__title {
+    .player__icon {
+      width: 1.8rem; height: 1.8rem; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem;
+      color: var(--bark);
+    }
+    .player__label {
       font-family: 'Cinzel', serif;
-      font-size: .6rem; letter-spacing: .1em;
+      font-size: .55rem; letter-spacing: .1em;
       color: var(--gold-light);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      flex: 1;
     }
-    .player__sub {
-      font-size: .58rem; letter-spacing: .05em;
-      color: rgba(255,255,255,.32);
-      margin-top: .1rem;
+    .player__chevron {
+      font-size: .6rem; color: rgba(255,255,255,.45);
+      transition: transform .3s;
     }
-    .player__bar {
-      margin-top: .38rem; width: 100%; height: 2px;
-      background: rgba(255,255,255,.1);
-      border-radius: 2px; cursor: pointer;
-      position: relative;
+    .player.open .player__chevron { transform: rotate(180deg); }
+    .player__frame {
+      display: none;
+      width: 220px; height: 124px;
     }
-    .player__progress {
-      height: 100%; width: 0%;
-      background: var(--gold);
-      border-radius: 2px;
-      transition: width .5s linear;
+    .player.open .player__frame { display: block; }
+    .player__frame iframe {
+      width: 100%; height: 100%;
+      border: none; display: block;
     }
-    .player__note {
-      position: absolute; top: -1.6rem; right: 0;
-      font-size: .85rem; opacity: 0;
-    }
-    .player__note.active { animation: noteFloat 2s ease-out forwards; }
 
     /* ─── PETALS ────────────────────────────────────────────── */
     .petal {
@@ -1099,15 +1090,19 @@
 
   <!-- MUSIC PLAYER -->
   <div class="player" id="player">
-    <button class="player__btn" id="play-btn" title="Activar sonido">🔇</button>
-    <div class="player__info">
-      <div class="player__title">Moonlight Serenade</div>
-      <div class="player__sub">Glenn Miller · 1939 · Dominio Público</div>
-      <div class="player__bar" id="progress-bar">
-        <div class="player__progress" id="progress-fill"></div>
-      </div>
+    <div class="player__toggle" id="player-toggle">
+      <div class="player__icon">♪</div>
+      <div class="player__label">Moonlight Serenade</div>
+      <span class="player__chevron">▲</span>
     </div>
-    <span class="player__note" id="note">♪</span>
+    <div class="player__frame" id="player-frame">
+      <iframe
+        id="yt-iframe"
+        src=""
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
   <!-- LIGHTBOX -->
@@ -1183,57 +1178,17 @@
     });
 
     /* ── MUSIC PLAYER ────────────────────────────────── */
-    const audio = new Audio();
-    audio.src = 'https://archive.org/download/78_moonlight-serenade_glenn-miller-and-his-orchestra_gbia0001318a/Moonlight%20Serenade%20-%20Glenn%20Miller%20and%20His%20Orchestra.mp3';
-    audio.loop = true;
-    audio.volume = 0.45;
+    /* ── YOUTUBE MUSIC WIDGET ────────────────────────── */
+    const playerEl  = document.getElementById('player');
+    const toggleEl  = document.getElementById('player-toggle');
+    const ytIframe  = document.getElementById('yt-iframe');
+    const YT_SRC    = 'https://www.youtube-nocookie.com/embed/tKsV1b81GPk?autoplay=1&loop=1&playlist=tKsV1b81GPk&rel=0';
 
-    const playBtn      = document.getElementById('play-btn');
-    const progressFill = document.getElementById('progress-fill');
-    const progressBar  = document.getElementById('progress-bar');
-    const noteEl       = document.getElementById('note');
-    let playing = false, noteInterval;
-
-    playBtn.textContent = '▶';
-    playBtn.title = 'Reproducir';
-
-    function spawnNote() {
-      noteEl.classList.remove('active');
-      void noteEl.offsetWidth;
-      noteEl.textContent = ['♪','♫','♩','♬'][Math.floor(Math.random()*4)];
-      noteEl.classList.add('active');
-    }
-    function startNotes() {
-      clearInterval(noteInterval);
-      noteInterval = setInterval(spawnNote, 2400);
-      spawnNote();
-    }
-
-    playBtn.addEventListener('click', () => {
-      if (!playing) {
-        audio.play().then(() => {
-          playing = true;
-          playBtn.textContent = '⏸';
-          playBtn.title = 'Pausar';
-          startNotes();
-        }).catch(()=>{});
-      } else {
-        audio.pause();
-        playing = false;
-        playBtn.textContent = '▶';
-        playBtn.title = 'Reproducir';
-        clearInterval(noteInterval);
-        noteEl.classList.remove('active');
+    toggleEl.addEventListener('click', () => {
+      const isOpen = playerEl.classList.toggle('open');
+      if (isOpen && !ytIframe.src) {
+        ytIframe.src = YT_SRC;
       }
-    });
-
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration)
-        progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
-    });
-    progressBar.addEventListener('click', e => {
-      const r = progressBar.getBoundingClientRect();
-      audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
     });
 
     /* ── SCROLL REVEAL (with stagger) ───────────────── */
