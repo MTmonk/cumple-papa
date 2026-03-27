@@ -391,28 +391,14 @@
     }
 
     /* ─── PHOTO INTERLUDE (parallax) ────────────────────────── */
-    .photo-interlude {
-      position: relative;
-      overflow: hidden;
-      height: 56vw;
-      min-height: 240px;
-      max-height: 500px;
-    }
     .photo-interlude img {
       position: absolute;
-      inset: 0;
+      nset: 0;
       width: 100%;
-      height: 140%;
-      top: -20%;
+      height: 120%;          /* less zoom */
+      top: -10%;             /* less vertical crop */
       object-fit: cover;
-      will-change: transform;
-      transition: opacity .6s ease;
-    }
-    .photo-interlude img[src="p20.jpeg"] {
-  height: 100%;
-  top: 0;
-  object-fit: contain;   /* no cropping */
-  background: #000;      /* optional: avoids empty space look */
+      object-position: center center; /* ensures better framing */
 }
     /* optional tint */
     .photo-interlude::after {
