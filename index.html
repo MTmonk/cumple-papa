@@ -408,6 +408,12 @@
       will-change: transform;
       transition: opacity .6s ease;
     }
+    .photo-interlude img[src="p20.jpeg"] {
+  height: 100%;
+  top: 0;
+  object-fit: contain;   /* no cropping */
+  background: #000;      /* optional: avoids empty space look */
+}
     /* optional tint */
     .photo-interlude::after {
       content: '';
