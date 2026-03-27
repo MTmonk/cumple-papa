@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz 80 Cumpleaños, Mario 🌻</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & TOKENS ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold:       #c9982a;
+      --gold-light: #e8c76a;
+      --gold-pale:  #f5e9c4;
+      --cream:      #fdf8ee;
+      --bark:       #3b2a14;
+      --moss:       #4a6741;
+      --white:      #ffffff;
+    }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--cream);
+      color: var(--bark);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+
+    /* ─── KEYFRAMES ─────────────────────────────────────────── */
+    @keyframes slowZoom  { from{transform:scale(1.08)} to{transform:scale(1)} }
+    @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes scrollLine{ 0%,100%{opacity:.6;transform:scaleY(1)} 50%{opacity:.2;transform:scaleY(.5)} }
+    @keyframes shimmer   { 0%,100%{opacity:.8} 50%{opacity:1} }
+    @keyframes fall      { 0%{transform:translateY(0) rotate(0);opacity:.7} 100%{transform:translateY(110vh) rotate(360deg);opacity:0} }
+    @keyframes noteFloat { 0%{transform:translateY(0);opacity:.9} 100%{transform:translateY(-18px);opacity:0} }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .hero__photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      animation: slowZoom 18s ease-out forwards;
+    }
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,.0)  0%,
+        rgba(0,0,0,.08) 40%,
+        rgba(30,18,5,.82) 100%);
+    }
+    .hero__text {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 0 1.25rem 4.5rem;
+      animation: fadeUp 1.4s ease .3s both;
+    }
+    .hero__eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem;
+      letter-spacing: .3em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: .85rem;
+    }
+    .hero__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 13vw, 7rem);
+      line-height: 1;
+      color: var(--white);
+      text-shadow: 0 2px 24px rgba(0,0,0,.45);
+    }
+    .hero__title em { font-style: italic; color: var(--gold-light); }
+    .hero__subtitle {
+      margin-top: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 4.5vw, 1.6rem);
+      color: rgba(255,255,255,.88);
+      line-height: 1.4;
+    }
+    .hero__scroll {
+      position: absolute; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: .35rem;
+      color: rgba(255,255,255,.55);
+      font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+      animation: fadeUp 1.4s ease 1.6s both;
+    }
+    .hero__scroll::after {
+      content: '';
+      width: 1px; height: 32px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.55), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+
+    /* ─── SHARED UTILITIES ──────────────────────────────────── */
+    .ornament {
+      text-align: center;
+      padding: 2rem 0 0;
+      color: var(--gold);
+      font-size: 1.2rem;
+      letter-spacing: .6em;
+      opacity: .6;
+    }
+    .section-label {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: .68rem; letter-spacing: .28em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .msg-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.7rem, 7vw, 3.2rem);
+      line-height: 1.2;
+      color: var(--bark);
+      margin-bottom: 1.5rem;
+    }
+    .msg-heading em { font-style: italic; color: var(--moss); }
+
+    /* ─── MESSAGE ───────────────────────────────────────────── */
+    .msg-section {
+      padding: 3rem 1.25rem;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .msg-body p {
+      font-size: clamp(.95rem, 4vw, 1.12rem);
+      line-height: 1.85;
+      color: #4a3920;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ─── FEATURED TRIO — mobile: 2 col + 1 full ───────────── */
+    .trio {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 260px;
+      gap: .5rem;
+      padding: 0 .5rem 2rem;
+    }
+    .trio__item {
+      position: relative; overflow: hidden; cursor: pointer;
+    }
+    .trio__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .55s ease;
+    }
+    .trio__item:active img { transform: scale(1.03); }
+    .trio__item:nth-child(2) { grid-column: span 2; }
+
+    /* ─── COUPLE ────────────────────────────────────────────── */
+    .couple { display: flex; flex-direction: column; }
+    .couple__photo {
+      overflow: hidden; cursor: pointer;
+      height: 280px;
+    }
+    .couple__photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform .6s;
+    }
+    .couple__photo:active img { transform: scale(1.03); }
+    .couple__text {
+      background: var(--gold-pale);
+      padding: 2.5rem 1.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .couple__text blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.15rem, 4.5vw, 1.9rem);
+      line-height: 1.6; color: var(--bark);
+      border-left: 2px solid var(--gold);
+      padding-left: 1.25rem;
+      margin-top: .85rem;
+    }
+
+    /* ─── GALLERY ───────────────────────────────────────────── */
+    .gallery-wrap { background: var(--bark); padding: 3rem 1rem; }
+    .gallery-header { text-align: center; margin-bottom: 2rem; }
+    .gallery-header .section-label { color: var(--gold-light); }
+    .gallery-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-style: italic;
+      font-size: clamp(1.6rem, 6vw, 3rem);
+      color: var(--white);
+    }
+    /* mobile: 2 columns */
+    .masonry {
+      columns: 2;
+      column-gap: .5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .masonry__item {
+      break-inside: avoid;
+      margin-bottom: .5rem;
+      overflow: hidden; cursor: pointer;
+      position: relative;
+    }
+    .masonry__item img {
+      width: 100%; display: block;
+      filter: brightness(.92);
+      transition: transform .45s ease, filter .45s ease;
+    }
+    .masonry__item:active img { transform: scale(1.03); filter: brightness(1.05); }
+    .masonry__item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(201,152,42,.22), transparent 50%);
+      opacity: 0; transition: opacity .35s;
+    }
+    .masonry__item:active::after { opacity: 1; }
+
+    /* ─── MILESTONES ────────────────────────────────────────── */
+    .milestones { background: var(--cream); padding: 3rem 1.25rem; }
+    .milestones-inner { max-width: 780px; margin: 0 auto; }
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem 1rem;
+      margin-top: 1.75rem;
+    }
+    .milestone { text-align: center; }
+    .milestone__year {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 6vw, 1.9rem);
+      color: var(--gold);
+    }
+    .milestone__label {
+      margin-top: .35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(.9rem, 3.5vw, 1.05rem);
+      color: var(--bark);
+    }
+
+    /* ─── WISHES ────────────────────────────────────────────── */
+    .wishes { max-width: 780px; margin: 0 auto; padding: 3rem 1.25rem; }
+    .wishes__list {
+      list-style: none; margin-top: 1.25rem;
+      display: flex; flex-direction: column; gap: .9rem;
+    }
+    .wishes__list li {
+      display: flex; align-items: flex-start; gap: .8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 4vw, 1.3rem);
+      line-height: 1.55;
+    }
+    .wishes__list li::before {
+      content: '✦'; color: var(--gold);
+      font-size: .7rem; margin-top: .38rem; flex-shrink: 0;
+    }
+
+    /* ─── CLOSING ───────────────────────────────────────────── */
+    .closing {
+      background: var(--bark);
+      text-align: center;
+      padding: 5rem 1.5rem;
+    }
+    .closing__number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(7rem, 28vw, 12rem);
+      font-weight: 300; line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--gold);
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    .closing__tagline {
+      margin-top: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 4.5vw, 1.8rem);
+      color: var(--gold-light);
+    }
+    .closing__from {
+      margin-top: 2rem;
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: .78rem; letter-spacing: .2em;
+      color: rgba(255,255,255,.38); text-transform: uppercase;
+    }
+
+    /* ─── LIGHTBOX ──────────────────────────────────────────── */
+    .lb {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(12,8,2,.97);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .lb.open { opacity: 1; pointer-events: all; }
+    .lb__img {
+      max-width: 96vw; max-height: 82vh;
+      object-fit: contain;
+      border: 1px solid rgba(201,152,42,.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,.7);
+      transition: opacity .2s;
+      touch-action: none;
+    }
+    .lb__close {
+      position: absolute; top: 1rem; right: 1.25rem;
+      color: var(--gold-light); font-size: 1.8rem;
+      cursor: pointer; background: none; border: none;
+      font-family: serif; line-height: 1;
+      padding: .5rem; /* larger tap target */
+    }
+    /* Mobile: nav buttons at bottom */
+    .lb__btn {
+      position: absolute; bottom: 2rem;
+      background: rgba(201,152,42,.15);
+      border: 1px solid rgba(201,152,42,.4);
+      color: var(--gold-light); font-size: 1.6rem;
+      width: 3.2rem; height: 3.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    .lb__prev { left: 2rem;  bottom: 2rem; }
+    .lb__next { right: 2rem; bottom: 2rem; }
+    .lb__count {
+      position: absolute; bottom: 3.2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cinzel', serif; font-size: .68rem;
+      letter-spacing: .2em; color: rgba(255,255,255,.4);
+    }
+
+    /* ─── MUSIC PLAYER ──────────────────────────────────────── */
+    .player {
+      position: fixed;
+      /* bottom-center on mobile */
+      bottom: 1rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 9000;
+      background: rgba(30,18,5,.93);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(201,152,42,.38);
+      border-radius: 60px;
+      padding: .65rem 1.2rem .65rem .75rem;
+      display: flex; align-items: center; gap: .75rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,.55);
+      width: calc(100% - 2rem);
+      max-width: 340px;
+    }
+    .player__btn {
+      width: 2.4rem; height: 2.4rem; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem;
+      transition: transform .2s, background .2s;
+      color: var(--bark);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .player__btn:active { transform: scale(.93); background: var(--gold-light); }
+    .player__info { overflow: hidden; flex: 1; }
+    .player__title {
+      font-family: 'Cinzel', serif;
+      font-size: .6rem; letter-spacing: .1em;
+      color: var(--gold-light);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .player__sub {
+      font-size: .58rem; letter-spacing: .05em;
+      color: rgba(255,255,255,.32);
+      margin-top: .1rem;
+    }
+    .player__bar {
+      margin-top: .38rem; width: 100%; height: 2px;
+      background: rgba(255,255,255,.1);
+      border-radius: 2px; cursor: pointer;
+      position: relative;
+    }
+    .player__progress {
+      height: 100%; width: 0%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width .5s linear;
+    }
+    .player__note {
+      position: absolute; top: -1.6rem; right: 0;
+      font-size: .85rem; opacity: 0;
+    }
+    .player__note.active { animation: noteFloat 2s ease-out forwards; }
+
+    /* ─── PETALS ────────────────────────────────────────────── */
+    .petal {
+      position: fixed; top: -20px;
+      pointer-events: none; z-index: 998;
+      animation: fall linear forwards;
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .85s ease, transform .85s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── BIO SECTION ───────────────────────────────────────── */
+    .bio-section {
+      background: var(--gold-pale);
+      padding: 4rem 1.25rem;
+    }
+    .bio-inner { max-width: 860px; margin: 0 auto; }
+    .bio-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.35rem, 5vw, 2rem);
+      line-height: 1.55;
+      color: var(--bark);
+      border-left: 3px solid var(--gold);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0 2.5rem;
+    }
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .bio-card {
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(201,152,42,.2);
+      padding: 1.5rem;
+    }
+    .bio-card__icon {
+      font-size: 1.4rem;
+      margin-bottom: .5rem;
+    }
+    .bio-card__title {
+      font-family: 'Cinzel', serif;
+      font-size: .65rem; letter-spacing: .2em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+    .bio-card__body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 3.5vw, 1.15rem);
+      line-height: 1.7; color: var(--bark);
+    }
+    .bio-card__body em { font-style: italic; color: var(--moss); }
+    @media (min-width: 600px) {
+      .bio-grid { grid-template-columns: 1fr 1fr; }
+      .bio-section { padding: 5rem 2rem; }
+    }
+    @media (min-width: 960px) {
+      .bio-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ─── VIDEO SECTION ─────────────────────────────────────── */
+    .video-section {
+      background: var(--bark);
+      padding: 3.5rem 1.25rem;
+      text-align: center;
+    }
+    .video-section .section-label { color: var(--gold-light); }
+    .video-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-style: italic;
+      font-size: clamp(1.6rem, 6vw, 3rem);
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .video-wrap {
+      max-width: 860px; margin: 0 auto;
+      border: 1px solid rgba(201,152,42,.35);
+      box-shadow: 0 12px 40px rgba(0,0,0,.55);
+    }
+    .video-wrap video {
+      display: block; width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+
+    /* ─── POEM SECTION ───────────────────────────────────────── */
+    .poem-section {
+      background: #1a1108;
+      padding: 4rem 1.25rem 5rem;
+      color: rgba(245,233,196,.85);
+    }
+    .poem-inner {
+      max-width: 860px; margin: 0 auto;
+    }
+    .poem-section .section-label { color: var(--gold-light); }
+    .poem-title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: clamp(1.1rem, 4vw, 1.7rem);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3rem;
+      line-height: 1.5;
+    }
+    .poem-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 4vw, 1.22rem);
+      line-height: 1.9;
+      font-style: italic;
+    }
+    .poem-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 3rem;
+      margin-bottom: 2.5rem;
+    }
+    .poem-col { display: flex; flex-direction: column; gap: 0; }
+    .poem-col p { margin: 0; line-height: 1.75; }
+    .poem-stanza { margin-bottom: 2.5rem; }
+    .poem-stanza p { margin: 0; line-height: 1.75; }
+    .poem-prose {
+      margin-bottom: 2rem;
+      font-size: clamp(.95rem, 3.5vw, 1.12rem);
+      line-height: 2;
+    }
+    .poem-divider {
+      border: none;
+      border-top: 1px solid rgba(201,152,42,.2);
+      margin: 2.5rem 0;
+    }
+
+    /* ─── TABLET  ≥ 600px ───────────────────────────────────── */
+    @media (min-width: 600px) {
+      .hero__eyebrow { font-size: .75rem; }
+      .msg-section  { padding: 3.5rem 2rem; }
+      .trio {
+        grid-template-columns: 1fr 1.3fr 1fr;
+        grid-template-rows: none;
+        gap: .75rem;
+        padding: 0 1rem 2.5rem;
+      }
+      .trio__item { height: auto; }
+      .trio__item:nth-child(1) { height: 280px; align-self: end; }
+      .trio__item:nth-child(2) { grid-column: auto; height: 360px; }
+      .trio__item:nth-child(3) { height: 240px; align-self: end; }
+      .trio__item:hover img { transform: scale(1.04); }
+      .masonry { columns: 3; column-gap: .65rem; }
+      .masonry__item { margin-bottom: .65rem; }
+      .masonry__item:hover img { transform: scale(1.03); filter: brightness(1.05); }
+      .masonry__item:hover::after { opacity: 1; }
+      .couple { flex-direction: row; min-height: 420px; }
+      .couple__photo { flex: 1; height: auto; }
+      .couple__photo:hover img { transform: scale(1.03); }
+      .couple__text { flex: 1; padding: 3rem 2.5rem; }
+      .lb__btn {
+        position: absolute; top: 50%; bottom: auto;
+        transform: translateY(-50%);
+        border-radius: 0;
+      }
+      .lb__prev { left: 1.25rem; }
+      .lb__next { right: 1.25rem; }
+      .lb__count { bottom: 1.5rem; }
+      .player {
+        left: auto; bottom: 1.5rem; right: 1.5rem;
+        transform: none;
+        width: auto; max-width: 290px;
+      }
+      .poem-section { padding: 5rem 2rem 6rem; }
+      .video-section { padding: 4.5rem 2rem; }
+    }
+
+    /* Poem cols collapse to single column on narrow screens */
+    @media (max-width: 599px) {
+      .poem-cols { grid-template-columns: 1fr; gap: 0; }
+      .poem-col:first-child { margin-bottom: 1.5rem; }
+    }
+
+    /* ─── DESKTOP  ≥ 960px ──────────────────────────────────── */
+    @media (min-width: 960px) {
+      .msg-section { padding: 4.5rem 2rem; }
+      .trio {
+        grid-template-columns: 1fr 1.45fr 1fr;
+        padding: 0 1.5rem 3rem;
+        max-width: 1100px; margin: 0 auto;
+      }
+      .trio__item:nth-child(1) { height: 340px; }
+      .trio__item:nth-child(2) { height: 450px; }
+      .trio__item:nth-child(3) { height: 300px; }
+      .masonry { columns: 4 220px; column-gap: .75rem; }
+      .masonry__item { margin-bottom: .75rem; }
+      .couple { min-height: 480px; }
+      .couple__text { padding: 4rem 3.5rem; }
+      .gallery-wrap { padding: 4.5rem 1.5rem; }
+      .milestones { padding: 4.5rem 2rem; }
+      .wishes { padding: 4.5rem 2rem; }
+      .player { bottom: 2rem; right: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero__photo" src="birthday-photo.jpeg" alt="Mario">
+    <div class="hero__overlay"></div>
+    <div class="hero__text">
+      <p class="hero__eyebrow">Una Celebración de 80 Años Maravillosos</p>
+      <h1 class="hero__title">Feliz <em>Cumpleaños</em></h1>
+      <p class="hero__subtitle">Al papá más maravilloso del mundo,<br><strong style="color:var(--gold-light);font-style:normal">Mario</strong></p>
+    </div>
+    <div class="hero__scroll">bajar</div>
+  </div>
+
+  <div class="ornament">· · ✦ · ·</div>
+
+  <!-- MESSAGE -->
+  <section class="msg-section reveal">
+    <span class="section-label">Con Todo Nuestro Amor</span>
+    <h2 class="msg-heading">
+      Ochenta años de <em>amor, sabiduría,</em><br>y todo lo que hay entre medias.
+    </h2>
+    <div class="msg-body">
+      <p>Ocho décadas. Una vida tan plena que podría llenar mil páginas — y sin embargo, los capítulos más importantes no están escritos en ningún libro. Viven en nuestros corazones: tu risa, tu fortaleza, tu sabiduría tranquila que siempre supo qué decir.</p>
+      <p>Has sido estudiante rebelde, exiliado, diplomático, periodista, académico, escritor, activista y actor. Has cruzado continentes — Nueva Delhi, París, Praga, Montevideo — y siempre volviste con más historias que las que el tiempo alcanza a contar.</p>
+      <p>Nos has dado raíces desde las que crecer y alas con las que volar. Has sido una constante — firme como la tierra bajo nuestros pies — y hoy celebramos cada año de la extraordinaria persona que eres, Mario.</p>
+      <p>Por ti, papá. Con un amor y gratitud inconmensurables — hoy, y siempre.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED TRIO -->
+  <div class="trio reveal">
+    <div class="trio__item" data-index="0"><img src="p1.jpeg" alt="Mario en el museo"></div>
+    <div class="trio__item" data-index="16"><img src="p17.jpeg" alt="Mario en París"></div>
+    <div class="trio__item" data-index="2"><img src="p3.jpeg" alt="Juntos de viaje"></div>
+  </div>
+
+  <!-- COUPLE HIGHLIGHT -->
+  <div class="couple reveal">
+    <div class="couple__photo" data-index="9"><img src="p10.jpeg" alt="En la naturaleza"></div>
+    <div class="couple__text">
+      <span class="section-label">Una vida compartida</span>
+      <blockquote>"Junto a ti, cada camino se convierte en una aventura, cada momento en un recuerdo para siempre."</blockquote>
+    </div>
+  </div>
+
+  <!-- MASONRY GALLERY -->
+  <div class="gallery-wrap reveal">
+    <div class="gallery-header">
+      <span class="section-label">Álbum de Recuerdos</span>
+      <h2>Momentos que nos han dado todo</h2>
+    </div>
+    <div class="masonry">
+      <div class="masonry__item" data-index="3"><img src="p4.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="5"><img src="p6.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="13"><img src="p14.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="4"><img src="p5.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="6"><img src="p7.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="14"><img src="p15.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="7"><img src="p8.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="10"><img src="p11.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="15"><img src="p16.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="8"><img src="p9.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="11"><img src="p12.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="12"><img src="p13.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="1"><img src="p2.jpeg" alt=""></div>
+      <div class="masonry__item" data-index="17"><img src="p18.png" alt=""></div>
+      <div class="masonry__item" data-index="17"><img src="p19.png" alt=""></div>
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-section reveal">
+    <span class="section-label">Un Momento Especial</span>
+    <h2>Un recuerdo en movimiento</h2>
+    <div class="video-wrap">
+      <video controls preload="metadata">
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- MILESTONES -->
+  <div class="milestones reveal">
+    <div class="milestones-inner">
+      <span class="section-label">Una Vida Bien Vivida</span>
+      <h2 class="msg-heading">Ocho décadas de <em>momentos</em><br>que vale la pena celebrar</h2>
+      <div class="milestone-grid">
+        <div class="milestone"><div class="milestone__year">1946</div><div class="milestone__label">Llegaste al mundo · 27 de marzo · México</div></div>
+        <div class="milestone"><div class="milestone__year">1968</div><div class="milestone__label">Voz del Consejo Nacional de Huelga · UNAM</div></div>
+        <div class="milestone"><div class="milestone__year">1982</div><div class="milestone__label">Ingreso al Servicio Exterior Mexicano</div></div>
+        <div class="milestone"><div class="milestone__year">2006</div><div class="milestone__label"><em>Entre terroristas</em> · FCE</div></div>
+        <div class="milestone"><div class="milestone__year">2023</div><div class="milestone__label">Actor en <em>Heroico</em> de David Zonana</div></div>
+        <div class="milestone"><div class="milestone__year">80</div><div class="milestone__label">Años de sabiduría, lucha y amor</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIO -->
+  <div class="bio-section reveal">
+    <div class="bio-inner">
+      <span class="section-label">Una Vida Extraordinaria</span>
+      <h2 class="msg-heading">Sociólogo, diplomático,<br><em>escritor y activista</em></h2>
+
+      <blockquote class="bio-quote">
+        "La memoria ganó la batalla contra la fuerza del olvido."
+        <footer style="font-size:.7em;margin-top:.6rem;font-style:normal;opacity:.65">— Mario Núñez Mariel, 57 años después del 2 de octubre de 1968</footer>
+      </blockquote>
+
+      <div class="bio-grid">
+
+        <div class="bio-card">
+          <div class="bio-card__icon">🎓</div>
+          <div class="bio-card__title">Formación</div>
+          <div class="bio-card__body">
+            Licenciado en Sociología por la <em>Facultad de Ciencias Políticas y Sociales de la UNAM</em>. Una vida intelectual forjada entre los libros, el pensamiento crítico y el compromiso con México.
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-card__icon">✊</div>
+          <div class="bio-card__title">1968 · La voz de una generación</div>
+          <div class="bio-card__body">
+            A los 21 años, fue <em>representante de la FCPS-UNAM</em> en el Consejo Nacional de Huelga durante el movimiento estudiantil del 68. Tras la masacre de Tlatelolco, vivió cinco años de exilio en Europa y Estados Unidos.
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-card__icon">🌍</div>
+          <div class="bio-card__title">Diplomático del Mundo</div>
+          <div class="bio-card__body">
+            Más de una década en el <em>Servicio Exterior Mexicano</em>: Nueva Delhi, París, Praga, Montevideo y Los Ángeles. Asesor de tres Cancilleres y del Secretario de Desarrollo Social.
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-card__icon">📰</div>
+          <div class="bio-card__title">Periodismo</div>
+          <div class="bio-card__body">
+            Coordinador General de producción y distribución del diario <em>La Jornada</em>. Analista internacional con apariciones en CUNY TV, Radio Educación y medios de ambos lados de la frontera.
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-card__icon">📚</div>
+          <div class="bio-card__title">Escritor e Investigador</div>
+          <div class="bio-card__body">
+            Autor de <em>Entre terroristas: una política exterior para el mundo del terror</em> (FCE, 2006 · 726 pp.). Fundador y director del Instituto de Estudios Mexicanos Transnacionales de la <em>Universidad de Rutgers</em>, Nueva Jersey.
+          </div>
+        </div>
+
+        <div class="bio-card">
+          <div class="bio-card__icon">🏛️</div>
+          <div class="bio-card__title">INAH &amp; Cine</div>
+          <div class="bio-card__body">
+            Director Ejecutivo del Patronato del <em>INAH</em>, impulsando alianzas internacionales para Teotihuacán. Actor en <em>Heroico</em> (2023, dir. David Zonana), interpretando al Profesor de Derechos Humanos.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- WISHES -->
+  <section class="wishes reveal">
+    <span class="section-label">Nuestros Deseos de Cumpleaños</span>
+    <h2 class="msg-heading">Lo que te deseamos,<br><em>siempre</em></h2>
+    <ul class="wishes__list">
+      <li>Salud y energía para disfrutar de cada amanecer que llegue a tu vida</li>
+      <li>Alegría en las pequeñas cosas — un jardín en flor, la risa de un nieto, una taza de café caliente</li>
+      <li>Orgullo por la familia hermosa que has construido y el legado que dejas</li>
+      <li>Momentos de paz y asombro, mientras sigues inspirándonos a todos</li>
+      <li>80 razones más para sonreír — empezando hoy, Mario</li>
+    </ul>
+  </section>
+
+  <!-- POEM -->
+  <section class="poem-section reveal">
+    <div class="poem-inner">
+      <span class="section-label">Poema</span>
+      <h2 class="poem-title">Auschwitz-Birkenau-Treblinca-Dachau</h2>
+
+      <div class="poem-body">
+
+        <!-- Stanza 1 – two columns -->
+        <div class="poem-cols">
+          <div class="poem-col">
+            <p>Mi amiga Shula</p>
+            <p>tardaba meses de lluvia</p>
+            <p>para explicar a medias palabras</p>
+            <p>el oscuro significado</p>
+            <p>&nbsp;</p>
+            <p>del número negro en su antebrazo tatuado</p>
+            <p>como única identidad</p>
+          </div>
+          <div class="poem-col">
+            <p>ante alambres de púas y</p>
+            <p>la sed todo el tiempo</p>
+            <p>angustia indescifrable de miedos, todo el tiempo,</p>
+            <p>el traquetear de los trenes, durmientes de la muerte,</p>
+            <p>todos sin nombre, un mismo destino, solución final</p>
+          </div>
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- Stanza 2 – two columns -->
+        <div class="poem-cols">
+          <div class="poem-col">
+            <p>Mi amiga Shula todo sabía</p>
+            <p>tardaba lágrimas insecables</p>
+            <p>y tardes interminables</p>
+            <p>para explicar</p>
+          </div>
+          <div class="poem-col">
+            <p>la banalidad del mal, nunca fue ni será banal,</p>
+            <p>la locura impuesta como hilos demenciales tejidos,</p>
+            <p>la interminable tristeza como única manera,</p>
+            <p>el holocausto como infierno industrial</p>
+          </div>
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- Stanza 3 – two columns -->
+        <div class="poem-cols">
+          <div class="poem-col">
+            <p>silenciosa su madre</p>
+            <p>temerosa guardaba</p>
+            <p>&nbsp;</p>
+            <p>en la bolsa del viejo delantal,</p>
+            <p>un pedazo de guerra</p>
+            <p>y otro pedazo de pan</p>
+          </div>
+          <div class="poem-col">
+            <p>sólo resistieron los menos y los necios</p>
+            <p>de tanto dolor desapareció el dolor</p>
+            <p>&nbsp;</p>
+            <p>preferir la muerte de tanto esperar la muerte</p>
+            <p>todo era ruido de tanto silencio</p>
+            <p>escapar durmiendo sin poder dormir</p>
+          </div>
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- Stanza 4 – two columns -->
+        <div class="poem-cols">
+          <div class="poem-col">
+            <p>Como obsesión aparecía</p>
+            <p>aquella vieja y sabia judía,</p>
+            <p>desdentada y desconfiada,</p>
+            <p>que entre chinches se libraba</p>
+            <p>de la sedienta noche interminable,</p>
+            <p>repasando en el sueño moribundo</p>
+            <p>los húmedos amores de la juventud temprana</p>
+          </div>
+          <div class="poem-col">
+            <p>tantos olores de muerte hasta no poder respirar,</p>
+            <p>los dolores en cuerpo indoloro por tanta maldad,</p>
+            <p>quién inventó este infierno, por qué tanto dolor,</p>
+            <p>cuánta perversión puede caber en una cabeza,</p>
+            <p>aun deshumanizándolos siguieron siendo humanos</p>
+            <p>formando montañas inverosímiles de cadáveres</p>
+            <p>esqueléticos de tanta delgadez hablando de hambre</p>
+          </div>
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- Prose stanzas -->
+        <div class="poem-stanza poem-prose">
+          <p>Después de haber escapado del abismo y la muerte,</p>
+          <p>de la más trágica y automática de todas las muertes,</p>
+          <p>mi amiga Shula cantaba la aparición de todos los mares,</p>
+          <p>dentro de sí, sin estremecerse, como sueños recurrentes,</p>
+          <p>para escapar del odio, de la tortura y del mal en su milimétrico recuerdo,</p>
+          <p>para escurrirse por la rendija apenas perceptible del atormentado olvido</p>
+          <p>como ruido que pasa por debajo de la puerta sin volver a despertarnos</p>
+        </div>
+
+        <div class="poem-stanza poem-prose">
+          <p>Para olvidar su desnudez impotente ante las miradas estúpidas y salvajes de los genocidas
+          y de los perros que parecían salidos de la misma madre ladrante, cerca de Cracovia, con olor
+          a lodo y terror, con la hierba muerta y sobre adoquines, en aquella hacinada y falsa estación
+          de trenes, sin horarios en el tablero ni andenes, el sueño y sólo el sueño permitía en los
+          camastros entre harapos heridos resistir; apenas entre el hedor de las letrinas podían
+          chismear, platicar, reír, fumar y sobrevivir; entre palabras en código, insultos y señas
+          reconocían su intimidad con la muerte, sorbiendo a tragos el desamor a cielo abierto, entre
+          la oscuridad y la intemperie; sabían en silencio que en Buchenwald los pájaros se habían ido,
+          al no resistir el olor, de la humana carne quemada en el ascenso del amarillento humo hacia
+          la nada; porque los muertos aparecían despiertos como fantasmas condenados a la nada; y los
+          armarios en el gueto quedaron repletos del olor de las vestimentas abandonadas; cuando los
+          soldados grises ladraban y gruñían como perros en jauría babeando rabia; cuando los
+          ferroviarios hartos de transportar cadáveres vivientes apenas abrían la boca; esos días
+          lloraban los bosques oscuros, los cielos no entendían la tierra del mal absoluto; esos días
+          sin azules, apagados los seres y las fosas pestilentes de los amontonados cadáveres desnudos.</p>
+        </div>
+
+        <div class="poem-stanza poem-prose">
+          <p>En ese día de lluvia Shulamit había descargado las últimas doce lágrimas; en ese día y
+          sólo en ese día había desparecido la eterna sonrisa de Shulamit. Ese día había enseñado
+          su media muerte adentro.</p>
+        </div>
+
+        <div class="poem-stanza poem-prose">
+          <p>Sin apartarse de la vida, saldría el sol de nuevo, llegarían las huestes de la luz, el arco
+          iris recuperaría el morado, el azul cobalto, el rojo Siena, el verde amaranto, el naranja
+          santo; las frutas anunciarían el tiempo de todas las frescuras y de todos los olores; las
+          rimas del armazón de palabras sonarían como las notas de Messiaen cuando el papa Pío XII
+          hubiese pagado todas las culpas de su cobardía. Inolvidable el día de los tumultos en las
+          calles, de los remolinos humanos para avisar el fin de todas las angustias por los que se
+          perdieron en la noche, de los entumidos que guardaban entre harapos: el último de los rojos
+          listones, de la hija que les arrancaron para nunca más escucharla pronunciar las pequeñas
+          palabras.</p>
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- Long verse paragraph -->
+        <div class="poem-stanza poem-prose">
+          <p>Ya nadie olvidaría cuando la vida cotidiana devino el infierno de todos los días y las tardes;</p>
+          <p>todos los vientos gritaban con las voces de la melancolía el destello de la muerte,</p>
+          <p>cuando morir era mejor que vivir, como me dijo Primo Levi recordando su tristeza inapagable</p>
+          <p>que le quemaba entre las sienes el cerebro aturdido que apenas registra el último de los</p>
+          <p>dolores, en el momento preciso de la Sinfonía de la Muerte, como si se tratara del previsto</p>
+          <p>destino de los dioses que nos abandonan y con gran precisión dibujan la tristeza cuando ya no</p>
+          <p>cabe entre las palabras; cuánta distinción de las palabras en las voces que logran el remolino</p>
+          <p>espiral de los infiernos como poema de Dante en carne propia, como la dinastía bíblica entre</p>
+          <p>los pliegues del recuerdo de los sábados tranquilos de la pereza colectiva, que adivina entre las</p>
+          <p>nubes la eterna sabiduría de los planetas que hospedan a todos los vientos y a todos los mares</p>
+          <p>circunnavegantes de los islotes de la muerte, de la desidia que sobreviene después de tanto</p>
+          <p>dolor y del infierno que se dibuja en la parte más íntima de la imaginación, en aquel espacio</p>
+          <p>cerebral minúsculo que registra el sonido de las piedras cuando chocan en los ríos</p>
+          <p>estrellándose entre los perfectos esqueletos de los pájaros, de las reptiles, de los mamíferos</p>
+          <p>y de los peces para anunciar la similitud de las especies, o el ruido de los helechos frotándose</p>
+          <p>entre ellos gimiendo que llegaron los tiempos de la justicia extraviada, de las nubes en silencio,</p>
+          <p>de los sonidos casi imperceptibles de las orugas ensimismadas cuando se arrastran para</p>
+          <p>anunciar que las mariposas serán negras, ataviadas en sus alas de jeroglíficos más negros todavía;</p>
+          <p>en esa tarde de las chimeneas humeantes a la distancia con amarillos olores indescriptibles</p>
+        </div>
+
+        <hr class="poem-divider">
+
+        <!-- Final stanzas -->
+        <div class="poem-stanza">
+          <p>que los pájaros negros no lograron descifrar</p>
+          <p>por qué las mariposas desaparecieron</p>
+          <p>y antes huyeron desplegando sus negros abanicos</p>
+          <p>y niñas y niños desaparecieron</p>
+          <p>para no esperar en vano las muertes inevitables</p>
+          <p>los árboles murieron</p>
+          <p>los gritos terribles y las terribles palabras callaron</p>
+          <p>los mataron de tanto matar la vida</p>
+        </div>
+
+        <div class="poem-stanza">
+          <p>de la guerra en la noche de los inocentes,</p>
+          <p>quedaron los cadáveres amontonados</p>
+          <p>de las indescifrables inocentes,</p>
+          <p>los abrigos y los anteojos abandonados</p>
+        </div>
+
+        <div class="poem-stanza poem-prose">
+          <p>de aquellas sobrevivientes que pidieron el último trago de agua para calmar la sed de sus hijos,</p>
+          <p>y que guardaban después en las bolsas obsesivas del delantal cuadriculado los simples pedazos</p>
+          <p>de pan, las migajas del olvido, las alas de los recuerdos atormentados, la dicha de aspirar y expirar,</p>
+        </div>
+
+        <div class="poem-stanza poem-prose">
+          <p>pero así pasarían años de niebla, despertarían atormentados de no poder olvidar, masticando el dolor,</p>
+        </div>
+
+        <div class="poem-stanza poem-prose">
+          <p>para que redescubrieran en el lejano vuelo de los pájaros, la certidumbre de seguir en esta vida,</p>
+          <p>la dicha de haber renacido por más que las tormentas permanecían entre las sienes;</p>
+          <p>sin poder evitar que los fantasmas aparecieran todos los lunes y los martes y los jueves y los viernes.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing reveal">
+    <div class="closing__number">80</div>
+    <p class="closing__tagline">Años siendo nuestro mayor regalo.</p>
+    <p class="closing__from">Con amor infinito · Tu Familia</p>
+  </div>
+
+  <!-- MUSIC PLAYER -->
+  <div class="player" id="player">
+    <button class="player__btn" id="play-btn" title="Activar sonido">🔇</button>
+    <div class="player__info">
+      <div class="player__title">Moonlight Serenade</div>
+      <div class="player__sub">Glenn Miller · 1939 · Dominio Público</div>
+      <div class="player__bar" id="progress-bar">
+        <div class="player__progress" id="progress-fill"></div>
+      </div>
+    </div>
+    <span class="player__note" id="note">♪</span>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lb" id="lb">
+    <button class="lb__close" id="lb-close">✕</button>
+    <button class="lb__btn lb__prev" id="lb-prev">‹</button>
+    <img class="lb__img" id="lb-img" src="" alt="">
+    <button class="lb__btn lb__next" id="lb-next">›</button>
+    <span class="lb__count" id="lb-count"></span>
+  </div>
+
+  <script>
+    /* ── LIGHTBOX ─────────────────────────────────────── */
+    const photos = [
+      'p1.jpeg','p2.jpeg','p3.jpeg','p4.jpeg','p5.jpeg',
+      'p6.jpeg','p7.jpeg','p8.jpeg','p9.jpeg','p10.jpeg',
+      'p11.jpeg','p12.jpeg','p13.jpeg','p14.jpeg','p15.jpeg',
+      'p16.jpeg','p17.jpeg','p18.png','birthday-photo.jpeg'
+    ];
+    let cur = 0;
+    const lb      = document.getElementById('lb');
+    const lbImg   = document.getElementById('lb-img');
+    const lbCount = document.getElementById('lb-count');
+
+    function lbOpen(i) {
+      cur = ((i % photos.length) + photos.length) % photos.length;
+      lbImg.style.opacity = 0;
+      lbImg.src = photos[cur];
+      lbImg.onload = () => { lbImg.style.opacity = 1; };
+      lbCount.textContent = (cur + 1) + ' / ' + photos.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function lbClose() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function lbNav(d) {
+      cur = ((cur + d) + photos.length) % photos.length;
+      lbImg.style.opacity = 0;
+      setTimeout(() => {
+        lbImg.src = photos[cur];
+        lbImg.onload = () => { lbImg.style.opacity = 1; };
+        lbCount.textContent = (cur + 1) + ' / ' + photos.length;
+      }, 140);
+    }
+
+    document.getElementById('lb-close').onclick = lbClose;
+    document.getElementById('lb-prev').onclick  = () => lbNav(-1);
+    document.getElementById('lb-next').onclick  = () => lbNav(1);
+    lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'Escape')     lbClose();
+    });
+
+    /* Touch swipe for lightbox */
+    let touchStartX = 0;
+    lbImg.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, {passive:true});
+    lbImg.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) lbNav(dx < 0 ? 1 : -1);
+    }, {passive:true});
+
+    document.querySelectorAll('[data-index]').forEach(el => {
+      el.addEventListener('click', () => lbOpen(+el.dataset.index));
+    });
+
+    /* ── MUSIC PLAYER ────────────────────────────────── */
+    const audio = new Audio();
+    audio.src = 'https://archive.org/download/78_moonlight-serenade_glenn-miller-and-his-orchestra_gbia0001318a/Moonlight%20Serenade%20-%20Glenn%20Miller%20and%20His%20Orchestra.mp3';
+    audio.loop = true;
+    audio.volume = 0.45;
+    audio.muted = true;
+
+    const playBtn      = document.getElementById('play-btn');
+    const progressFill = document.getElementById('progress-fill');
+    const progressBar  = document.getElementById('progress-bar');
+    const noteEl       = document.getElementById('note');
+    let playing = false, noteInterval;
+
+    function spawnNote() {
+      noteEl.classList.remove('active');
+      void noteEl.offsetWidth;
+      noteEl.textContent = ['♪','♫','♩','♬'][Math.floor(Math.random()*4)];
+      noteEl.classList.add('active');
+    }
+    function startNotes() {
+      clearInterval(noteInterval);
+      noteInterval = setInterval(spawnNote, 2400);
+      spawnNote();
+    }
+
+    // Autoplay muted (browsers allow this)
+    audio.play().then(() => {
+      playing = true;
+      playBtn.textContent = '🔇';
+      playBtn.title = 'Toca para activar el sonido';
+      startNotes();
+    }).catch(() => {
+      playBtn.textContent = '▶';
+      playBtn.title = 'Reproducir';
+    });
+
+    playBtn.addEventListener('click', () => {
+      if (audio.muted) {
+        audio.muted = false;
+        playBtn.textContent = '⏸';
+        playBtn.title = 'Pausar';
+        return;
+      }
+      if (!playing) {
+        audio.play().then(() => {
+          playing = true;
+          playBtn.textContent = '⏸';
+          startNotes();
+        }).catch(()=>{});
+      } else {
+        audio.pause();
+        playing = false;
+        playBtn.textContent = '▶';
+        clearInterval(noteInterval);
+        noteEl.classList.remove('active');
+      }
+    });
+
+    // Unmute on any page interaction
+    const unmute = () => {
+      if (audio.muted && playing) {
+        audio.muted = false;
+        playBtn.textContent = '⏸';
+      }
+      document.removeEventListener('touchstart', unmute);
+      document.removeEventListener('scroll', unmute);
+    };
+    document.addEventListener('touchstart', unmute, {passive:true});
+    document.addEventListener('scroll',     unmute, {passive:true});
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration)
+        progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+    });
+    progressBar.addEventListener('click', e => {
+      const r = progressBar.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+    });
+
+    /* ── SCROLL REVEAL ───────────────────────────────── */
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    /* ── FLOATING PETALS ─────────────────────────────── */
+    const emojis = ['🌻','🌼','🌿','✨','🍀'];
+    function petal() {
+      const el = document.createElement('div');
+      el.className = 'petal';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      const d = 7 + Math.random() * 6;
+      el.style.animationDuration = d + 's';
+      el.style.fontSize = (.85 + Math.random() * .7) + 'rem';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), d * 1000);
+    }
+    setInterval(petal, 1500);
+    setTimeout(petal, 600);
+  </script>
+</body>
+</html>
